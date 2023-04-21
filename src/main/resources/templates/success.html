@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Data Save</title>
+</head>
+<body>
+	
+	<!-- <b> Total ${noOfRecords} records uploaded !</b>  -->
+	<!-- <div >
+	<p>[[${noOfRecords}]] total records uploaded? ! </p>
+	</div> -->
+		
+		
+		<!-- <div class="text-center">
+		<h1  style="color: green" >
+		[[${noOfRecords}]] records uploaded !
+		</h1>
+	</div> -->
+	
+	<div class="form-group">
+		<h1 style="color: green">[[${noOfRecords}]] records uploaded !</h1>
+		<span><a href="/" th:href="@{/login}">Login
+				here</a></span>
+	</div>
+
+</body>
+</html>

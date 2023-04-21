@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:insert="fragments/header :: headerfragment" >
+	<meta charset="ISO-8859-1">
+	<title>Registration and Login App</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+	
+ <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+ 	
+</head>
+
+	<!--Start of dropdown menu  -->
+	
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	
+	<link rel="stylesheet" href="style.css">
+	
+	
+	<!-- End of dropdown menu -->
+	
+	
+	
+	<link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet"/>
+	<link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet"/>
+	<link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+	
+	<style>
+		tfoot input {
+		width: 100%;
+		padding : 3px;
+		box-sizing: border-box;
+		}
+		
+		.alert-success {
+    	margin-left: 25px;
+    	margin-right: 25px;
+    	color: #155724;
+    	background-color: #d4edda;
+    	border-color: #c3e6cb;
+		}
+		.alert-danger{
+		margin-left: 25px;
+    	margin-right: 25px;
+    	color: #155724;
+    	background-color: #e53935;
+    	border-color: #e53935;
+		}
+	</style>
+	
+<body>
+
+	<!-- <div th:insert="fragments/it_menu :: menu"></div> -->
+	<br>
+	
+	<nav>
+    <div class="navbar">
+      <i class='bx bx-menu'></i>
+      <div class="logo"><a th:href="@{/homepage}">UserLoginModule</a></div>
+      
+      <div class="nav-links">
+        <div class="sidebar-logo">
+          <span class="logo-name">UserLoginModule</span>
+          <i class='bx bx-x' ></i>
+        </div>
+         
+        <ul class="links">
+          <li><a th:href="@{/homepage}">HOME</a></li>
+          <li>
+            <a href="#">Menu1</a>
+            <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+            <ul class="htmlCss-sub-menu sub-menu">
+              <li><a href="#" th:target="_blank">Submenu1</a></li>
+              <li><a href="#" th:target="_blank">Submenu2</a></li>
+              <li class="more">
+                <span><a href="#">More</a>
+                <i class='bx bxs-chevron-right arrow more-arrow'></i>
+              </span>
+                <ul class="more-sub-menu sub-menu">
+                  <li><a th:href="@{/uploadexceldata}" th:target="_blank">Submenu3</a></li>
+                  <li><a href="#">Submenu4</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Menu2</a>
+            <i class='bx bxs-chevron-down js-arrow arrow '></i>
+            <ul class="js-sub-menu sub-menu">
+              <li><a href="#">Submenu1</a></li>
+              <li><a href="#">Submenu2</a></li>
+              <li><a href="#">Submenu3</a></li>
+             
+            </ul>
+            
+          </li>
+          <li><a href="#">ABOUT US</a></li>
+          <li><a href="#">CONTACT US</a></li>
+          <li style="color: white"> Welcome &nbsp; <span sec:authentication="principal.username"> </span></li>
+          <li sec:authorize="isAuthenticated()"> <a th:href="@{/logout}"> Logout</a></li>
+          
+        </ul>
+      </div> 
+      </div>
+  </nav>
+  <script src="script.js"></script>
+<br>
+<br>
+<br>	
+	
+	
+	<th:block th:if="${session.message}">
+					<h4 class="alert alert-success" data-dismiss="alert">[[${session.message}]] </h4>
+					<th:block th:text="${#session.removeAttribute('message')}"> </th:block>
+	</th:block>
+				
+	<th:block th:if="${session.msg}">
+					<h4 class="alert alert-success " data-dismiss="alert">[[${session.msg}]] </h4>
+					<th:block th:text="${#session.removeAttribute('msg')}"> </th:block>
+	</th:block>	
+				
+	<th:block th:if="${session.msgg}">
+					<h4 class="alert alert-danger " data-dismiss="alert">[[${session.msgg}]] </h4>
+					<th:block th:text="${#session.removeAttribute('msgg')}"> </th:block>
+	</th:block>				
+					
+	
+	<div class="padd20">
+		<div class="mr-1 ml-1">
+			<table id="example" class="datatableClass table table-striped table-hover" style="width:100%">
+				<thead>
+					<tr>
+						<th style="text-align: left;">User Id</th>
+						<th style="text-align: left;">First Name</th>
+						<th style="text-align: left;">Last Name</th>
+						<th style="text-align: left;">Email Address</th>
+						<th style="text-align: left;">Created Date</th>
+						<th style="text-align: center;">Status</th>
+						<!-- <th style="text-align: center;">Action</th> -->
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="dashboard : ${allusers}">
+						<!-- <td style="text-align: left;" th:text="${dashboard.id} ?: '-'"></td> -->
+						<!-- <td style="text-align: left;" > <a class="link" th:href="@{/viewit/{id}(id=${dashboard.id})}" th:color="black"
+							th:text="${dashboard.firstName} ?: '-'"> </a></td> -->
+						<td style="text-align: left;" > <a class="link" th:href="@{/viewuser/{id}(id=${dashboard.id})}" 
+						th:color="black" th:text="${dashboard.id} ?: '-'"> </a></td>	
+						<td style="text-align: left;" th:text="${dashboard.firstName} ?: '-'"></td>	
+						<td style="text-align: left;" th:text="${dashboard.lastName} ?: '-'"></td>
+						<td style="text-align: left;" th:text="${dashboard.email} ?: '-'"></td>
+						<td style="text-align: left;" th:text="${#dates.format(dashboard.createdOn,'dd-MMM-yyyy')} ?: '-'"></td>
+						<td style="text-align: center;" th:text="${dashboard.status} ?: '-'"></td>
+						<!-- <td style="text-align: center;"><a th:href="@{/edit-it-partner/{id}(id=${dashboard.id})}">Edit</a></td> -->
+					</tr>
+				</tbody>
+				
+				<tfoot>
+					<tr>
+						<th style="text-align: left;">User Id</th>
+						<th style="text-align: left;">First Name</th>
+						<th style="text-align: left;">Last Name</th>
+						<th style="text-align: left;">Email Address</th>
+						<th style="text-align: left;">Created Date</th>
+						<th style="text-align: left;">Status</th>
+						<!-- <th style="text-align: center;">Action</th> -->
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	
+	<div th:insert="fragments/footer :: footer"></div>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+	<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+	<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+	
+	<script>
+		$(document).ready(function () {
+			 $('#example tfoot th').each(function(){
+				 
+				var title = $(this).text();
+				$(this).html('<input type="text" placeholder="Search by '+title+'"  />');
+			}); 
+			var table = $('#example').DataTable({
+				buttons: [
+		            'copy', 'csv', 'excel', 'pdf', 'print'
+		        ],
+				initComplete: function(){
+					this.api().columns().every(function(){
+						var that = this;
+						
+					$('input', this.footer()).on('keyup change clear', function(){
+						if(that.search() !== this.value) {
+							that
+								.search(this.value)
+								.draw();
+						}
+					});
+					});
+				},
+				"searching": true,
+				"columns": [
+					{ "width": "13%" },
+					{ "width": "15%" },
+					{ "width": "15%" },
+					{ "width": "15%" },
+					{ "width": "14%" },
+					{ "width": "12%" }
+					
+				],
+				"scrollX": true,
+				"pageLength": 10,
+				"dom": '<"top"iBf<"clear">>rt<"bottom"ipl<"clear">>',
+				"columnDefs": [{
+					"targets": [5], /* column index */
+					"orderable": false, /* true or false */
+				}],
+				"language": {
+					"lengthMenu": "&nbsp;&nbsp;_MENU_ <span>items per page</span>",
+					"zeroRecords": "No matching results found",
+					"info": "Showing page _PAGE_ of _PAGES_",
+					"infoEmpty": "No records available",
+					"infoFiltered": "(filtered from _MAX_ total records)"
+				}
+			});	
+			
+		}); 
+		//});
+	</script>
+</body>
+</html>

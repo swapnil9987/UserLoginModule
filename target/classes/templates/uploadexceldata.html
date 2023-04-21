@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<title>Upload excel data</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="style.css"> -->
+
+	<style type="text/css">
+		 #first{
+			background-color: #e3eed8;
+			height: 300px;
+			width: 900px;
+			border-radius: 10px;
+			border: 1px solid grey;
+			padding-left: 5px;
+		} 
+		.container{
+			border-radius: 10px;
+			width: 1400px;
+			height: 600px;
+			background-color: #f7f7f7;
+			border: 1px solid grey;
+			padding-left: 35px;
+			padding-bottom: 35px;
+			margin-top: 80px;
+			margin-left: 35px;
+			
+		}
+		
+		.button {
+    		display: inline-block;
+    		width: 55px;
+   		    height: 35px;
+    		background: #5cb55c;
+    		padding: 10px;
+    		text-align: center;
+    		border-radius: 5px;
+    		color: white;
+    		font-weight: bold;
+    		line-height: 25px;
+		}
+		
+		.button1 {
+    		display: inline-block;
+    		width: 55px;
+   		    height: 35px;
+    		background: #ff534f;
+    		padding: 10px;
+    		text-align: center;
+    		border-radius: 5px;
+    		color: white;
+    		font-weight: bold;
+    		line-height: 25px;
+		}
+		
+		/* div a{
+			display:inline-block;
+			
+		} */
+	
+	</style>
+</head>
+
+	<!--Start of dropdown menu  -->
+	
+		<!-- <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	
+		<link rel="stylesheet" href="style.css"> -->
+	
+	<!-- End of dropdown menu -->
+	
+<body>
+	
+	<div class="container" >
+		<div class="row">
+			<div >
+				<h1>Welcome to upload excel data page</h1>
+
+				<h2>File Upload and Data Save Page</h2>
+
+				<form th:action="@{/uploadFile}" method="post"
+					enctype="multipart/form-data" id="first">
+				
+					<br /> <br /> Please select a file to upload : <input type="file"
+						name="file" value="Browse File"  /> <br /> <br /> Press here to
+					upload the file : <input type="submit" value="upload" /> <br /> <br />
+
+					<h4 style="color: green">[[${message}]]</h4>
+					<br /> Do you want to save excel data into database ? 
+						<a class="button" th:href="@{/saveData}" ><b>Yes</b> </a> 
+						<a class="button1" th:href="@{/homepage}"><b>No</b></a>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

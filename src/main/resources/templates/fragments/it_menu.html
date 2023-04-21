@@ -1,0 +1,40 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="container-fluid header-section" th:fragment="menu">
+
+<div th:if="${message}" th:class="${'alert ' + alertClass}" id="message-alert">
+   <button type="button" class="close" data-dismiss="alert"> <span aria-hidden="true">&times;</span></button>
+   
+<!-- <div class="text-center" th:if="${message}" th:text="#{${message}}" ></div> -->
+<div class="text-center" th:if="${message}" th:text="${message}"></div>
+</div>
+    <div class="container">
+        <header>
+        	
+            <a th:href= "@{/homepage}"><img th:src="@{/images/UserLoginModule.jpg}" class="img-responsive header-image"></a> 
+            <div class="col-md-1 header-right" style="float: right;">
+                <!-- <a class="link" th:href="@{/search}">Search Cards</a> -->
+                 <!-- <a class="link" th:href="@{/list}">List Of IT Partners</a> -->
+                 
+                 <a class="link" th:href="@{/homepage}">Dashboard</a>
+                <!-- <a class="link" th:href="@{/additpartner}">Add New IT Partners</a> -->
+              	
+                <!-- <a class="link" href="https://www.cscs.uk.com/contact/" target="_blank" style="width: 90px !important;">Help</a> -->
+                <div class="">
+  					<button type="button" class="btn btn-outline-primary btn-circle btn-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    					<i class="fa fa-user"></i>
+ 					</button>
+  					<div class="dropdown-menu">
+    					<a class="dropdown-item text-dark" th:href="@{/logout}">Logout</a>
+  					</div>
+				</div>
+                <!-- <div class="user-logout">
+                    <a class="user-profile" href="javascript:void(0);">RS</a>
+                    <a class="user-logout-link" th:href="@{/qr}">QR code(Google Auth)</a>
+                    <a class="user-logout-link" th:href="@{/logout}">Logout</a>
+                </div> -->
+            </div>
+        </header>
+     </div>
+</div>
+</html>

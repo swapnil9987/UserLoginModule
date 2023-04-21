@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<meta charset="ISO-8859-1">
+	<title>Registration and Login App</title>
+
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+
+
+<body>
+
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Registration and
+					Login Module</a>
+			</div>
+		</div>
+	</nav>
+
+<br>
+<br>
+<br>
+<br>
+	<!-- Create HTML registration form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				
+				<th:block th:if="${session.message}">
+					<p class="alert alert-danger" data-dismiss="alert">[[${session.message}]] </p>
+					<th:block th:text="${#session.removeAttribute('message')}"> </th:block>
+				
+				</th:block>
+				
+				<h1>Registration</h1>
+
+				<form th:action="@{/registration}" id="validateAddForm" method="post" th:object="${user}">
+					<div class="form-group">
+						<label class="control-label" for="firstName"> First Name </label>
+						<input id="firstName" class="form-control" th:field="*{firstName}"
+						th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' : ''}"
+							placeholder="please enter first name" 
+						required autofocus="autofocus" 
+						/>
+						<div th:if= "${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger" role="alert">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="lastName"> Last Name </label> 
+						<input id="lastName" class="form-control" th:field="*{lastName}"
+					 th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
+					 placeholder="please enter last name" required autofocus="autofocus" 
+					 />
+					 <div th:if= "${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger" role="alert">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label" for="phoneNumber">Phone Number</label> 
+						<input id="phoneNumber" class="form-control" th:field="*{phoneNumber}"
+					 		th:classappend="${#fields.hasErrors('phoneNumber') ? 'is-invalid' : ''}"
+					 		placeholder="please enter phone number"  
+						 />
+					 <div th:if= "${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="alert alert-danger" role="alert">
+						</div>
+					</div>
+					
+
+					<div class="form-group">
+						<label class="control-label" for="email"> Email </label> 
+						<input
+							id="email" class="form-control" th:field="*{email}" 
+							th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+						 placeholder="please enter email" required autofocus="autofocus" />
+						<!--  <th:block th:if="${session.message}">
+								<p class="text-left fs-4 text-danger">[[${session.message}]] </p>
+								<th:block th:text="${#session.removeAttribute('message')}"> </th:block>
+				
+							</th:block> -->
+						<div th:if= "${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger" role="alert">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="password"> Password </label> 
+						<input
+							id="password" class="form-control" type="password"
+							th:field="*{password}"
+							th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+							 placeholder="please enter password" required autofocus="autofocus"/>
+						<div th:if= "${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert">
+						</div>	 
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+						<span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+	<script
+		src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'>
+	</script>
+	
+	<script>
+	$(document).ready(function () {
+
+	});
+
+	$('#validateAddForm').bootstrapValidator({
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {
+			 firstName: {
+				validators: {
+					stringLength: {
+						min: 3,
+						max: 20,
+						message: 'Please enter first name with minimum 3 and maximum 20 characters'
+					},
+					notEmpty: {
+						message: 'first name should not be empty'
+					}
+				}
+			}, 
+			lastName: {
+				validators: {
+					stringLength: {
+						min: 3,
+						max: 20,
+						message: 'Please enter last name with minimum 3 and maximum 20 characters'
+					},
+					notEmpty: {
+						message: 'last name should not be empty'
+					}
+				}
+			},
+			phoneNumber: {
+				validators: {
+					numeric: {
+						message: 'The phone number must be a number without space in between'
+					},
+					stringLength: {
+						min: 0,
+						max: 10,
+						message: 'Please enter phone number with 10 digits'
+					},
+				}
+			},
+			email: {
+				validators: {
+					stringLength: {
+						min: 3,
+						max: 50,
+						message: 'Please enter email with minimum 3 and maximum 50 characters'
+					},
+					notEmpty: {
+						message: 'email should not be empty'
+					}
+				}
+			},
+			password: {
+				validators: {
+					stringLength: {
+						min: 3,
+						max: 20,
+						message: 'Please enter password with minimum 3 and maximum 20 characters'
+					},
+					notEmpty: {
+						message: 'password should not be empty'
+					}
+				}
+			},
+		}
+	});
+	</script>
+</body>
+</html>

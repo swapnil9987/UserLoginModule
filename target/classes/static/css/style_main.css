@@ -1,0 +1,127 @@
+.blueheader {
+  	height: 153px;
+  	margin-left: 25px;
+    margin-right: 25px;
+    padding: 31px 389px 30px;
+    background-color: #a7a7a7;
+}
+
+.centerHeadingWhite {
+  width: 664px;
+  height: 40px;
+  /* margin: 0 0 24px; */
+  /* font-family: SFProDisplay; */
+  font-size: 28px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: 0.8px;
+  text-align: center;
+  color: #fff;
+}
+
+.search-input {
+  background-color: white;
+  width: 30%;
+}
+
+.btn-lg,
+.btn-group-lg>.btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem !important;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.dataTables_length label {
+  padding-top: 6px;
+  text-align: center;
+}
+
+.padd20_a {
+  padding: 20px !important;
+}
+
+.container_a {
+  max-width: 100% !important;
+}
+
+.alert_a {
+  padding: 10px !important;
+  margin-top: 10px;
+}
+
+.help-block_a {
+  color: red;
+}
+
+header .header-right a.link {
+  text-align: center;
+  width: auto !important;
+}
+
+.padding_view_page {
+  padding: 5px !important;
+  padding-left: 30px !important;
+}
+
+.options-wrapper-card-edit {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+
+h5,
+.h5 {
+  font-size: 1rem !important;
+}
+
+.centerHeadingWhitePadding {
+  margin: 0px !important;
+  text-align: left !important;
+  padding-left: 50px !important;
+}
+
+.padd20 {
+  padding: 20px !important;
+}
+
+.container {
+  max-width: 100% !important;
+}
+
+.alert {
+  padding: 10px !important;
+  margin-top: 10px;
+}
+
+.help-block {
+  color: red;
+}
+
+/* 
+thead th {
+  white-space: nowrap;
+} */
+
+
+
+/* .datatableClass th { font-size: 14px; }
+.datatableClass td { font-size: 13px; } */
+
+
+
+/* body {
+  font-size: 13px !important;
+  font-weight: 900;
+  font-style: normal;
+} */
+
+.bottom {
+  padding-top: 15px !important;
+}
